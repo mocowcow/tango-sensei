@@ -8,7 +8,7 @@
     <body>
         <h1>日期測驗</h1>
         <form name="QA Form" action="ResultServlet" method="POST">
-            ${question}
+            ${qForm}
             <br>
             <input type="submit" value="交卷"/>
         </form>

@@ -31,23 +31,19 @@ public class TestServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        //get test set
+        TestSet[] ts = TestSet.getDefaultTestSet();
+        //build qForm
         String qForm = "";
-        //build questions form
-        for (int i = 0; i < 10; i++) {
-            qForm += (i + 1) + "<input type=\"input\" name=\"a" + (i + 1) + "\" value=\"\" /><br>";
+        for (int i = 0; i < ts.length; i++) {
+            TestSet key = ts[i];
+            String word = key.getQuestion();
+            String input = "<input type=\"input\" name=\"userAns" + (i + 1) + "\" value=\"\" /><br>";
+            qForm += word + "<br>" + input;
         }
-        //build answer
-        String[] answer = new String[10];
-        for (int i = 0; i < 10; i++) {
-            answer[0] = "ans" + (i + 1);
-        }
-        //build question
-        String[] question = new String[10];
-
         //set session
-        request.getSession().setAttribute("a", answer);
-        request.getSession().setAttribute("q", answer);
-        request.setAttribute("question", qForm);
+        request.getSession().setAttribute("ts", ts);
+        request.setAttribute("qForm", qForm);
         request.getRequestDispatcher("test.jsp").forward(request, response);
     }
 
