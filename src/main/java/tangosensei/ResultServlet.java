@@ -33,12 +33,15 @@ public class ResultServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        //decode parameter by UTF-8
+        request.setCharacterEncoding("UTF-8");
         String result = "";
         TestSet[] ts = (TestSet[]) request.getSession().getAttribute("ts");
         Enumeration<String> e = request.getParameterNames();
         for (TestSet key : ts) {
             String para = e.nextElement();
             result += String.format("<br>%s<br>你的答案=%s<br>正確答案=%s<br>", key.getQuestion(), request.getParameter(para), key.getAnswer());
+            System.out.println(request.getParameter(para));
         }
         request.setAttribute("result", result);
         request.getRequestDispatcher("result.jsp").forward(request, response);
