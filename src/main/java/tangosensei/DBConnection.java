@@ -17,7 +17,7 @@ public class DBConnection {
         }
     }
 
-    public static Object[] getConnection(String sql) {
+    public static ResultSet query(String sql) {
         if (prop == null) {
             loadProperties();
         }
@@ -25,23 +25,12 @@ public class DBConnection {
         String url = prop.getProperty("url");
         String user = prop.getProperty("user");
         String password = prop.getProperty("password");
+        ResultSet rs = null;
         try {
             Class.forName(driver);
             Connection conn = DriverManager.getConnection(url, user, password);
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            //do process
-            while (rs.next()) {
-
-                int id = rs.getInt("id");
-                String q = rs.getString("q");
-                String a = rs.getString("a");
-
-                System.out.print("ID: " + id);
-                System.out.print(", q: " + q);
-                System.out.print(", a: " + a);
-                System.out.print("\n");
-            }
+            rs = stmt.executeQuery(sql);
             //close
             rs.close();
             stmt.close();
@@ -49,12 +38,8 @@ public class DBConnection {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return null;
+        return rs;
 
     }
 
-    public static void main(String[] args) {
-        String sql = "select * from date";
-        getConnection(sql);
-    }
 }
