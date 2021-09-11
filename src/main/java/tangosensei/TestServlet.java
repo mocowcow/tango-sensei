@@ -32,7 +32,7 @@ public class TestServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         //get test set
-        TestSet[] ts = TestSet.getDefaultTestSet();
+        TestSet[] ts = TestSet.getAllTestSetFromDB();
         //build qForm
         String qForm = "";
         for (int i = 0; i < ts.length; i++) {

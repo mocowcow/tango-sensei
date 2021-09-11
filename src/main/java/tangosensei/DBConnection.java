@@ -3,6 +3,7 @@ package tangosensei;
 import java.io.FileInputStream;
 import java.util.Properties;
 import java.sql.*;
+import java.util.LinkedList;
 
 public class DBConnection {
 
@@ -11,13 +12,13 @@ public class DBConnection {
     private static void loadProperties() {
         prop = new Properties();
         try {
-            prop.load(new FileInputStream("dbconfig.txt"));
+            prop.load(new FileInputStream("C:\\Users\\Administrator\\Documents\\NetBeansProjects\\tangosensei\\dbconfig.txt"));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    public static ResultSet query(String sql) {
+    public static TestSet[] query(String sql) {
         if (prop == null) {
             loadProperties();
         }
@@ -25,12 +26,14 @@ public class DBConnection {
         String url = prop.getProperty("url");
         String user = prop.getProperty("user");
         String password = prop.getProperty("password");
-        ResultSet rs = null;
+        TestSet[] ts = null;
         try {
             Class.forName(driver);
             Connection conn = DriverManager.getConnection(url, user, password);
             Statement stmt = conn.createStatement();
-            rs = stmt.executeQuery(sql);
+            ResultSet rs = stmt.executeQuery(sql);
+            //build ts from rs
+            ts = buildTestSet(rs);
             //close
             rs.close();
             stmt.close();
@@ -38,8 +41,22 @@ public class DBConnection {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return rs;
+        return ts;
 
+    }
+
+    private static TestSet[] buildTestSet(ResultSet rs) {
+        LinkedList<TestSet> li = new LinkedList<>();
+        try {
+            while (rs.next()) {
+                String q = rs.getString("q");
+                String a = rs.getString("a");
+                li.add(new TestSet(q, a));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return li.toArray(new TestSet[li.size()]);
     }
 
 }

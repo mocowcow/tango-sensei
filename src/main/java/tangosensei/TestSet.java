@@ -5,6 +5,8 @@
  */
 package tangosensei;
 
+import java.sql.*;
+import java.util.LinkedList;
 import java.util.Random;
 
 public class TestSet {
@@ -48,7 +50,7 @@ public class TestSet {
         ts[7] = new TestSet("八日", "ようか");
         ts[8] = new TestSet("九日", "ここのか");
         ts[9] = new TestSet("十日", "とおか");
-        //shuffle array
+        //shuffle array 
         Random r = new Random();
         for (int i = 0; i < ts.length; i++) {
             int idx = r.nextInt(ts.length);
@@ -57,5 +59,10 @@ public class TestSet {
             ts[idx] = temp;
         }
         return ts;
+    }
+
+    public static TestSet[] getAllTestSetFromDB() {
+        String sql = "select * from date";
+        return DBConnection.query(sql);
     }
 }
