@@ -5,11 +5,12 @@
  */
 package tangosensei;
 
+import java.io.Serializable;
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.Random;
 
-public class TestSet {
+public class TestSet implements Serializable {
 
     final private String question;
     final private String answer;
