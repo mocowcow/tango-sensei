@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "TestServlet", urlPatterns = {"/TestServlet"})
 public class TestServlet extends HttpServlet {
 
+    final static int DEFAULT_TEST_NUM = 10;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,7 +34,8 @@ public class TestServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         //get test set
-        TestSet[] ts = TestSet.getAllTestSetFromDB();
+        String table = request.getParameter("testType");
+        TestSet[] ts = TestSet.getRandomTestSet(table, DEFAULT_TEST_NUM);
         //build qForm
         String qForm = "";
         for (int i = 0; i < ts.length; i++) {

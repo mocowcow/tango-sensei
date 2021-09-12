@@ -67,7 +67,7 @@ public class TestSet {
     }
 
     public static TestSet[] getRandomTestSet(String table, int n) {
-        String template = "SELECT * FROM `%table` ORDER BY Rand() LIMIT %d";
+        String template = "SELECT * FROM `%s` ORDER BY Rand() LIMIT %d";
         String sql = String.format(template, table, n);
         return DBConnection.query(sql);
     }
