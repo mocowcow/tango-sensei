@@ -8,6 +8,7 @@
     <body>
         <h1>測驗結果</h1>
         ${result}
+        <br>
         <form name="From1" action="index.html" method="POST">
             <input type="submit" value="回首頁" />
         </form>
