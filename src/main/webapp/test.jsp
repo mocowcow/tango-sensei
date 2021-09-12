@@ -6,7 +6,7 @@
         <title>日本語先生</title>
     </head>
     <body>
-        <h1>日期測驗</h1>
+        <h1>測驗題目</h1>
         <form name="QA Form" action="ResultServlet" method="POST">
             ${qForm}
             <br>
