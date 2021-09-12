@@ -65,4 +65,10 @@ public class TestSet {
         String sql = "select * from date";
         return DBConnection.query(sql);
     }
+
+    public static TestSet[] getRandomTestSet(String table, int n) {
+        String template = "SELECT * FROM `%table` ORDER BY Rand() LIMIT %d";
+        String sql = String.format(template, table, n);
+        return DBConnection.query(sql);
+    }
 }
