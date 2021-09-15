@@ -75,6 +75,15 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>appengine-maven-plugin</artifactId>
+                <version>2.4.1</version>
+                <configuration>
+                    <devserver.host>0.0.0.0</devserver.host>
+                    <devserver.port>8787</devserver.port>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
