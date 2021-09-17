@@ -37,12 +37,15 @@ public class TestServlet extends HttpServlet {
         String table = request.getParameter("testType");
         TestSet[] ts = TestSet.getRandomTestSet(table, DEFAULT_TEST_NUM);
         //build qForm
-        String qForm = "";
-        for (int i = 0; i < ts.length; i++) {
-            TestSet key = ts[i];
-            String word = key.getQuestion();
-            String input = "<input type=\"input\" name=\"userAns" + (i + 1) + "\" value=\"\" /><br>";
-            qForm += word + "<br>" + input;
+        String qForm = "empty query";
+        if (ts != null) {
+            qForm = "";
+            for (int i = 0; i < ts.length; i++) {
+                TestSet key = ts[i];
+                String word = key.getQuestion();
+                String input = "<input type=\"input\" name=\"userAns" + (i + 1) + "\" value=\"\" /><br>";
+                qForm += word + "<br>" + input;
+            }
         }
         //set session
         request.getSession().setAttribute("ts", ts);
