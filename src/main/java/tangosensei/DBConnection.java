@@ -1,35 +1,20 @@
 package tangosensei;
 
-import java.io.FileInputStream;
-import java.util.Properties;
 import java.sql.*;
 import java.util.LinkedList;
 
 public class DBConnection {
 
-    private static Properties prop;
-
-    private static void loadProperties() {
-        prop = new Properties();
-        try {
-            prop.load(new FileInputStream("C:\\Users\\Administrator\\Documents\\NetBeansProjects\\tangosensei\\dbconfig.txt"));
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
+    private static final String DB_DRIVER = System.getenv("driver");
+    private static final String DB_URL = System.getenv("url");
+    private static final String DB_USER = System.getenv("user");
+    private static final String DB_PW = System.getenv("password");
 
     public static TestSet[] query(String sql) {
-        if (prop == null) {
-            loadProperties();
-        }
-        String driver = prop.getProperty("driver");
-        String url = prop.getProperty("url");
-        String user = prop.getProperty("user");
-        String password = prop.getProperty("password");
         TestSet[] ts = null;
         try {
-            Class.forName(driver);
-            Connection conn = DriverManager.getConnection(url, user, password);
+            Class.forName(DB_DRIVER);
+            Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PW);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             //build ts from rs
