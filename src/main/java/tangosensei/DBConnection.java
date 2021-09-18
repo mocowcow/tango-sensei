@@ -5,10 +5,10 @@ import java.util.LinkedList;
 
 public class DBConnection {
 
-    private static final String DB_DRIVER = System.getenv("driver");
-    private static final String DB_URL = System.getenv("url");
-    private static final String DB_USER = System.getenv("user");
-    private static final String DB_PW = System.getenv("password");
+    private static final String DB_DRIVER = System.getenv("DB_DRIVER");
+    private static final String DB_URL = System.getenv("DB_URL");
+    private static final String DB_USER = System.getenv("DB_USER");
+    private static final String DB_PW = System.getenv("DB_PW");
 
     public static TestSet[] query(String sql) {
         TestSet[] ts = null;
