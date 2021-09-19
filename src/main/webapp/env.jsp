@@ -12,6 +12,6 @@
         <title>check environment</title>
     </head>
     <body>
-        <p>dbconfig</p><%= System.getenv("dbconfig")%>
+        <p>CLOUDSQL</p><%= System.getenv("CLOUDSQL")%>
     </body>
 </html>
