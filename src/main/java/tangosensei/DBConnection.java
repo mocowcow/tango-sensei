@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 public class DBConnection {
 
+    private static final String CLOUDSQL = System.getenv("CLOUDSQL");
     private static final String DB_DRIVER = System.getenv("DB_DRIVER");
     private static final String DB_URL = System.getenv("DB_URL");
     private static final String DB_USER = System.getenv("DB_USER");
@@ -13,8 +14,13 @@ public class DBConnection {
     public static TestSet[] query(String sql) {
         TestSet[] ts = null;
         try {
-            Class.forName(DB_DRIVER);
-            Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PW);
+            Connection conn;
+            if (CLOUDSQL != null) {
+                conn = DriverManager.getConnection(CLOUDSQL);
+            } else {
+                Class.forName(DB_DRIVER);
+                conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PW);
+            }
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             //build ts from rs
