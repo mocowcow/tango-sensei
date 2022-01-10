@@ -2,7 +2,7 @@
 提供一些容易混淆的日語單字供使用者練習
 
 ## 已部署至GOOGLE雲端：
-[連結請點我](https://unified-academy-326013.de.r.appspot.com/)
+<s>[GCP試用期結束](https://unified-academy-326013.de.r.appspot.com/)</s>
 
 ## 使用說明
 選擇任一題庫並從中隨機選取10題，待使用者填入答案後，提供回答及參考解答比對  
